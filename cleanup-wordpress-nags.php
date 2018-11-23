@@ -15,6 +15,8 @@
 
 // eliminate sales pitch notices from The Events Calendar / Modern Tribe
 add_filter( 'tribe_bf_2018_end_time', '__return_zero' );
+add_filter( 'tribe_bf_2019_end_time', '__return_zero' );
+add_filter( 'tribe_bf_2020_end_time', '__return_zero' );
 
 // hide the non-dismissable notice to update geocoding on venues
 add_action( 'admin_init', function() {
