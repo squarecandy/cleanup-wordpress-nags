@@ -20,12 +20,13 @@ add_filter( 'tribe_bf_2020_end_time', '__return_zero' );
 
 // hide the non-dismissable notice to update geocoding on venues
 add_action( 'admin_init', function() {
-	remove_action( 'admin_notices', array(
-		Tribe__Events__Pro__Geo_Loc::instance(),
-		'show_offer_to_fix_notice'
-	) );
+	if ( class_exists('Tribe__Events__Pro__Geo_Loc') ) :
+		remove_action( 'admin_notices', array(
+			Tribe__Events__Pro__Geo_Loc::instance(),
+			'show_offer_to_fix_notice'
+		) );
+	endif;
 }, 100 );
-
 
 //////////
 // Post Types Order / NSP Code
