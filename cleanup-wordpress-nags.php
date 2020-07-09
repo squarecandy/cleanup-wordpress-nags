@@ -36,12 +36,21 @@ add_action(
 );
 
 //////////
-// Post Types Order / NSP Code
+// Hacky CSS Hiding
 
-// hide nag box for custom post order plugin
 function squarecandy_cpt_info_box_override_css() {
-	if ( class_exists( 'CPTO' ) ) {
-		echo '<style>#cpt_info_box{display:none;}</style>';
-	}
+	echo '<style>';
+	$hide_styles = array(
+		// hide nag box for custom post order plugin
+		'#cpt_info_box',
+		// hide event calendar nag to connect to data collection service
+		'.updated.success.fs-notice.fs-slug-the-events-calendar[data-id="connect_account"]',
+		// hide event calendar virtual events ad
+		'.tribe-notice-tribe-virtual-events',
+		// hide "do you like plugin WPS Hide Login?"
+		'#dnh-wrm_1e278f4992d8bb3f1f0b ',
+	);
+	echo implode( ',', $hide_styles );
+	echo '{display:none;}</style>';
 }
 add_action( 'admin_head', 'squarecandy_cpt_info_box_override_css' );
