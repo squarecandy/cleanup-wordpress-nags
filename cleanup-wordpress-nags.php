@@ -19,22 +19,29 @@ add_filter( 'tribe_bf_2019_end_time', '__return_zero' );
 add_filter( 'tribe_bf_2020_end_time', '__return_zero' );
 
 // hide the non-dismissable notice to update geocoding on venues
-add_action( 'admin_init', function() {
-	if ( class_exists('Tribe__Events__Pro__Geo_Loc') ) :
-		remove_action( 'admin_notices', array(
-			Tribe__Events__Pro__Geo_Loc::instance(),
-			'show_offer_to_fix_notice'
-		) );
+add_action(
+	'admin_init',
+	function() {
+		if ( class_exists( 'Tribe__Events__Pro__Geo_Loc' ) ) :
+			remove_action(
+				'admin_notices',
+				array(
+					Tribe__Events__Pro__Geo_Loc::instance(),
+					'show_offer_to_fix_notice',
+				)
+			);
 	endif;
-}, 100 );
+	},
+	100
+);
 
 //////////
 // Post Types Order / NSP Code
 
 // hide nag box for custom post order plugin
 function squarecandy_cpt_info_box_override_css() {
-	if (class_exists('CPTO')) {
+	if ( class_exists( 'CPTO' ) ) {
 		echo '<style>#cpt_info_box{display:none;}</style>';
 	}
 }
-add_action('admin_head', 'squarecandy_cpt_info_box_override_css');
+add_action( 'admin_head', 'squarecandy_cpt_info_box_override_css' );
