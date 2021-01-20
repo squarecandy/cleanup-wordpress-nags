@@ -56,4 +56,10 @@ function squarecandy_cpt_info_box_override_css() {
 add_action( 'admin_head', 'squarecandy_cpt_info_box_override_css' );
 
 
-apply_filters( 'autoptimize_filter_main_imgopt_plug_notice', __return_false() );
+// get rid of autoptimize/shortpixel cross promotion notice
+add_filter(
+	'autoptimize_filter_main_imgopt_plug_notice',
+	function() {
+		return '';
+	}
+);
