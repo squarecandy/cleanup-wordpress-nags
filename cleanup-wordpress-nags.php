@@ -17,6 +17,9 @@
 add_filter( 'tribe_bf_2018_end_time', '__return_zero' );
 add_filter( 'tribe_bf_2019_end_time', '__return_zero' );
 add_filter( 'tribe_bf_2020_end_time', '__return_zero' );
+add_filter( 'tribe_bf_2021_end_time', '__return_zero' );
+add_filter( 'tribe_bf_2022_end_time', '__return_zero' );
+add_filter( 'tribe_bf_2023_end_time', '__return_zero' );
 
 // hide the non-dismissable notice to update geocoding on venues
 add_action(
@@ -63,3 +66,9 @@ add_filter(
 		return '';
 	}
 );
+
+function squarecandy_hide_wordpress_seo_menus() {
+	// Hide "SEO Workouts" upsell quasi-spam from Editor level.
+	remove_menu_page( 'wpseo_workouts' );
+}
+add_action( 'admin_menu', 'squarecandy_hide_wordpress_seo_menus', 11 );
