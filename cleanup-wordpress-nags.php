@@ -20,6 +20,9 @@ add_filter( 'tribe_bf_2020_end_time', '__return_zero' );
 add_filter( 'tribe_bf_2021_end_time', '__return_zero' );
 add_filter( 'tribe_bf_2022_end_time', '__return_zero' );
 add_filter( 'tribe_bf_2023_end_time', '__return_zero' );
+// universal/longterm solutions for 2024+ !!!
+define( 'TEC_HIDE_UPSELL', true );
+add_filter( 'tec_common_telemetry_show_optin_modal', '__return_false' );
 
 // hide the non-dismissable notice to update geocoding on venues
 add_action(
