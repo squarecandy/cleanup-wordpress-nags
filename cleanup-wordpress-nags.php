@@ -6,7 +6,7 @@
  * Description: WordPress Plugin to cleanup annoying nag or marketing messages from various plugins we use.
  * Author: Square Candy Design
  * Author URI: https://squarecandydesign.com/
- * Version: 1.2.0
+ * Version: 1.2.1
  */
 
 
