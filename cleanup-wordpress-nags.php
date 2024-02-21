@@ -75,3 +75,17 @@ function squarecandy_hide_wordpress_seo_menus() {
 	remove_menu_page( 'wpseo_workouts' );
 }
 add_action( 'admin_menu', 'squarecandy_hide_wordpress_seo_menus', 11 );
+
+
+// https://www.advancedcustomfields.com/blog/acf-6-2-5-security-release/
+// Don't show the ACF "the_field" notice in wp-admin
+add_filter( 'acf/admin/prevent_escaped_html_notice', '__return_true' );
+
+// Do log problematic content so we can fix it.
+if ( WP_DEBUG ) {
+	add_action( 'acf/will_remove_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
+	add_action( 'acf/removed_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
+	function sqcdy_acf_security_logging_2024( $function, $selector, $field, $post_id ) {
+		debug_log( "function: $function • selector: $selector • field: $field, • post_id: $post_id", 'ACF unsafe_html' );
+	}
+}
