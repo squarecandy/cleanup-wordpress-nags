@@ -86,6 +86,6 @@ if ( WP_DEBUG ) {
 	add_action( 'acf/will_remove_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
 	add_action( 'acf/removed_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
 	function sqcdy_acf_security_logging_2024( $function, $selector, $field, $post_id ) {
-		debug_log( "function: $function • selector: $selector • field: $field, • post_id: $post_id", 'ACF unsafe_html' );
+		error_log( "ACF unsafe_html: function: $function • selector: $selector • field: $field • post_id: $post_id" );
 	}
 }
