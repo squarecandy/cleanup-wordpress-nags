@@ -79,9 +79,29 @@ add_action( 'admin_menu', 'squarecandy_hide_wordpress_seo_menus', 11 );
 
 // https://www.advancedcustomfields.com/blog/acf-6-2-5-security-release/
 // Don't show the ACF "the_field" notice in wp-admin
-add_filter( 'acf/admin/prevent_escaped_html_notice', '__return_true' );
 
-// Do log problematic content so we can fix it.
+add_filter( 'acf/admin/prevent_escaped_html_notice', 'sqcdy_cleanup_nags_acf_prevent_escaped_html_notice' );
+function sqcdy_cleanup_nags_acf_prevent_escaped_html_notice() {
+	// if in debug mode, log useful info
+	if ( WP_DEBUG ) {
+		// HTML that has already been escaped.
+		$escaped = _acf_get_escaped_html_log();
+		if ( ! empty( $escaped ) ) {
+			error_log( 'ACF: escaped html' );
+			error_log( print_r( $escaped, true ) );
+		}
+		// HTML that will be escaped in future releases.
+		$will_escape = _acf_get_will_escape_html_log();
+		if ( ! empty( $will_escape ) ) {
+			error_log( 'ACF: html that will be escaped in future releases' );
+			error_log( print_r( $will_escape, true ) );
+		}
+	}
+	// hide the admin notice
+	return true;
+}
+
+// Log problematic content when displayed
 if ( WP_DEBUG ) {
 	add_action( 'acf/will_remove_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
 	add_action( 'acf/removed_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
