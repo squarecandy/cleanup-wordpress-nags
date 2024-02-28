@@ -96,7 +96,7 @@ function sqcdy_cleanup_nags_acf_prevent_escaped_html_notice() {
 					$selector = ( is_array( $info ) && isset( $info['selector'] ) ) ? $info['selector'] : '';
 					$function = ( is_array( $info ) && isset( $info['function'] ) ) ? $info['function'] : '';
 					$post_id  = ( is_array( $info ) && isset( $info['post_id'] ) ) ? $info['post_id'] : '';
-					error_log( "ACF $log_type html: function: $function • selector: $selector • post_id: $post_id" );
+					error_log( "ACF $log_type html: function: $function | selector: $selector | post_id: $post_id" );
 				endforeach;
 			endif;
 		endforeach;
@@ -114,7 +114,7 @@ if ( WP_DEBUG ) {
 		function sqcdy_acf_security_logging_2024( $function, $selector, $field, $post_id ) {
 			$new_value = (string) get_field( $selector, $post_id, true, true );
 			$old_value = ( is_array( $field ) && isset( $field['value'] ) ) ? $field['value'] : false;
-			error_log( "ACF unsafe_html: function: $function • selector: $selector • post_id: $post_id • old value: $old_value • new value: $new_value" );
+			error_log( "ACF unsafe_html: function: $function | selector: $selector | post_id: $post_id | old value: $old_value | new value: $new_value" );
 		}
 	}
 }
