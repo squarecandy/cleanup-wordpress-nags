@@ -83,8 +83,8 @@ add_action( 'admin_menu', 'squarecandy_hide_wordpress_seo_menus', 11 );
 add_filter( 'acf/admin/prevent_escaped_html_notice', 'sqcdy_cleanup_nags_acf_prevent_escaped_html_notice' );
 function sqcdy_cleanup_nags_acf_prevent_escaped_html_notice() {
 
-	// if in debug mode, log useful info
-	if ( WP_DEBUG && is_admin() && ! wp_doing_ajax() ) :
+	// if in debug mode, log useful info, filter for if you want to silence this even when WP_DEBUG is on
+	if ( WP_DEBUG && is_admin() && ! wp_doing_ajax() && ! apply_filters( 'sqcdy_cleanup_nags_acf_escape_no_debug', false ) ) :
 
 		$logs                = array();
 		$logs['escaped']     = function_exists( '_acf_get_escaped_html_log' ) ? _acf_get_escaped_html_log() : false; // HTML that has already been escaped.
@@ -107,7 +107,7 @@ function sqcdy_cleanup_nags_acf_prevent_escaped_html_notice() {
 }
 
 // Log problematic content when displayed
-if ( WP_DEBUG ) {
+if ( WP_DEBUG && ! apply_filters( 'sqcdy_cleanup_nags_acf_escape_no_debug', false ) ) {
 	add_action( 'acf/will_remove_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
 	add_action( 'acf/removed_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
 	if ( ! function_exists( 'sqcdy_acf_security_logging_2024' ) ) {
