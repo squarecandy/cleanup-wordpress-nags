@@ -6,7 +6,7 @@
  * Description: WordPress Plugin to cleanup annoying nag or marketing messages from various plugins we use.
  * Author: Square Candy Design
  * Author URI: https://squarecandydesign.com/
- * Version: 1.2.2-dev.3
+ * Version: 1.2.2-dev.4
  */
 
 
@@ -87,8 +87,8 @@ function sqcdy_cleanup_nags_acf_prevent_escaped_html_notice() {
 	if ( WP_DEBUG && is_admin() && ! wp_doing_ajax() ) :
 
 		$logs                = array();
-		$logs['escaped']     = _acf_get_escaped_html_log(); // HTML that has already been escaped.
-		$logs['will_escape'] = _acf_get_will_escape_html_log(); // HTML that will be escaped in future releases.
+		$logs['escaped']     = function_exists( '_acf_get_escaped_html_log' ) ? _acf_get_escaped_html_log() : false; // HTML that has already been escaped.
+		$logs['will_escape'] = function_exists( '_acf_get_will_escape_html_log' ) ? _acf_get_will_escape_html_log() : false; // HTML that will be escaped in future releases.
 
 		foreach ( $logs as $log_type => $log ) :
 			if ( ! empty( $log ) && is_array( $log ) ) :
