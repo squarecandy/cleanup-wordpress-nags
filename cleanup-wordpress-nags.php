@@ -77,26 +77,31 @@ function squarecandy_hide_wordpress_seo_menus() {
 add_action( 'admin_menu', 'squarecandy_hide_wordpress_seo_menus', 11 );
 
 
+//phpcs:disable WordPress.PHP.DevelopmentFunctions.error_log_error_log
 // https://www.advancedcustomfields.com/blog/acf-6-2-5-security-release/
 // Don't show the ACF "the_field" notice in wp-admin
-
 add_filter( 'acf/admin/prevent_escaped_html_notice', 'sqcdy_cleanup_nags_acf_prevent_escaped_html_notice' );
 function sqcdy_cleanup_nags_acf_prevent_escaped_html_notice() {
+
 	// if in debug mode, log useful info
-	if ( WP_DEBUG ) {
-		// HTML that has already been escaped.
-		$escaped = _acf_get_escaped_html_log();
-		if ( ! empty( $escaped ) ) {
-			error_log( 'ACF: escaped html' );
-			error_log( print_r( $escaped, true ) );
-		}
-		// HTML that will be escaped in future releases.
-		$will_escape = _acf_get_will_escape_html_log();
-		if ( ! empty( $will_escape ) ) {
-			error_log( 'ACF: html that will be escaped in future releases' );
-			error_log( print_r( $will_escape, true ) );
-		}
-	}
+	if ( WP_DEBUG && is_admin() && ! wp_doing_ajax() ) :
+
+		$logs                = array();
+		$logs['escaped']     = _acf_get_escaped_html_log(); // HTML that has already been escaped.
+		$logs['will_escape'] = _acf_get_will_escape_html_log(); // HTML that will be escaped in future releases.
+
+		foreach ( $logs as $log_type => $log ) :
+			if ( ! empty( $log ) && is_array( $log ) ) :
+				foreach ( $log as $field_key => $info ) :
+					$selector = ( is_array( $info ) && isset( $info['selector'] ) ) ? $info['selector'] : '';
+					$function = ( is_array( $info ) && isset( $info['function'] ) ) ? $info['function'] : '';
+					$post_id  = ( is_array( $info ) && isset( $info['post_id'] ) ) ? $info['post_id'] : '';
+					error_log( "ACF $log_type html: function: $function • selector: $selector • post_id: $post_id" );
+				endforeach;
+			endif;
+		endforeach;
+	endif;
+
 	// hide the admin notice
 	return true;
 }
@@ -107,7 +112,10 @@ if ( WP_DEBUG ) {
 	add_action( 'acf/removed_unsafe_html', 'sqcdy_acf_security_logging_2024', 99, 4 );
 	if ( ! function_exists( 'sqcdy_acf_security_logging_2024' ) ) {
 		function sqcdy_acf_security_logging_2024( $function, $selector, $field, $post_id ) {
-			error_log( "ACF unsafe_html: function: $function • selector: $selector • field: $field • post_id: $post_id" );
+			$new_value = (string) get_field( $selector, $post_id, true, true );
+			$old_value = ( is_array( $field ) && isset( $field['value'] ) ) ? $field['value'] : false;
+			error_log( "ACF unsafe_html: function: $function • selector: $selector • post_id: $post_id • old value: $old_value • new value: $new_value" );
 		}
 	}
 }
+//phpcs:enable WordPress.PHP.DevelopmentFunctions.error_log_error_log
