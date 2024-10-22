@@ -61,6 +61,13 @@ function squarecandy_cpt_info_box_override_css() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		// don't show the core update nag asking non-admins to contact the administrator
 		$hide_styles[] = '.update-nag';
+
+		// hide the red "update" nag bubble for GiveWP
+		$hide_styles[] = '#menu-posts-give_forms span.update-plugins';
+		// hide the GiveWP red bubble encouraging beta feature use!!!
+		$hide_styles[] = '.givewp-feature-flag-notification-counter';
+		// hide the entire update admin menu for non-admins
+		$hide_styles[] = '#menu-plugins a[href$="give-updates"]';
 	}
 
 	echo implode( ',', $hide_styles );
