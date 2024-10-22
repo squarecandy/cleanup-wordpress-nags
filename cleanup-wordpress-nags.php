@@ -66,6 +66,7 @@ function squarecandy_cpt_info_box_override_css() {
 		$hide_styles[] = '#menu-posts-give_forms span.update-plugins';
 		// hide the GiveWP red bubble encouraging beta feature use!!!
 		$hide_styles[] = '.givewp-feature-flag-notification-counter';
+		$hide_styles[] = '#adminmenu .menu-counter.givewp-feature-flag-notification-counter'; // make sure we override it
 		// hide the entire update admin menu for non-admins
 		$hide_styles[] = '#menu-plugins a[href$="give-updates"]';
 	}
