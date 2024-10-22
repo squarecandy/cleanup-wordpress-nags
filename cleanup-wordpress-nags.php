@@ -56,6 +56,13 @@ function squarecandy_cpt_info_box_override_css() {
 		// hide "do you like plugin WPS Hide Login?"
 		'#dnh-wrm_1e278f4992d8bb3f1f0b ',
 	);
+
+	// hide for non-admins only
+	if ( ! current_user_can( 'manage_options' ) ) {
+		// don't show the core update nag asking non-admins to contact the administrator
+		$hide_styles[] = '.update-nag';
+	}
+
 	echo implode( ',', $hide_styles );
 	echo '{display:none;}</style>';
 }
