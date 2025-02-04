@@ -134,3 +134,13 @@ if ( WP_DEBUG && ! apply_filters( 'sqcdy_cleanup_nags_acf_escape_no_debug', fals
 	}
 }
 //phpcs:enable WordPress.PHP.DevelopmentFunctions.error_log_error_log
+
+/**
+ * Prevent SEOPress from hijacking wp-admin every time it updates
+ */
+add_action( 'plugins_loaded', 'sqcdy_remove_seopress_redirect' );
+function sqcdy_remove_seopress_redirect() {
+	if ( is_admin() && ! wp_doing_ajax() ) {
+		remove_action( 'admin_init', 'seopress_redirect_after_activation' );
+	}
+}
