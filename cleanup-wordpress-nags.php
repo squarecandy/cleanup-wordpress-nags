@@ -55,6 +55,8 @@ function squarecandy_cpt_info_box_override_css() {
 		'.tribe-notice-tribe-virtual-events',
 		// hide "do you like plugin WPS Hide Login?"
 		'#dnh-wrm_1e278f4992d8bb3f1f0b ',
+		// hide EWWW rate prompt
+		'#ewww-image-optimizer-review',
 	);
 
 	// hide for non-admins only
