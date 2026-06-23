@@ -1,0 +1,14 @@
+{
+	"version": "1.2.5-develop.0",
+	"scripts": {
+		"release": "standard-version"
+	},
+	"standard-version": {
+		"skip": {
+			"tag": false
+		}
+	},
+	"devDependencies": {
+		"standard-version": "9.3.0"
+	}
+}
