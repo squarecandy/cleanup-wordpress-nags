@@ -9,15 +9,7 @@
 			"type": "json"
 		},
 		{
-			"filename": "plugin.php",
-			"updater": "version-updater.js"
-		},
-		{
-			"filename": "readme.txt",
-			"updater": "version-updater.js"
-		},
-		{
-			"filename": "functions.php",
+			"filename": "cleanup-wordpress-nags.php",
 			"updater": "version-updater.js"
 		}
 	]
