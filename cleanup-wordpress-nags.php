@@ -1,13 +1,13 @@
 <?php
-/**
- * Plugin Name: Square Candy Cleanup Nags
- * Plugin URI: https://github.com/squarecandy/cleanup-wordpress-nags
- * GitHub Plugin URI: https://github.com/squarecandy/cleanup-wordpress-nags
- * Description: WordPress Plugin to cleanup annoying nag or marketing messages from various plugins we use.
- * Author: Square Candy Design
- * Author URI: https://squarecandydesign.com/
- * Version: 1.2.5-dev.0
- */
+/*
+Plugin Name: Square Candy Cleanup Nags
+Plugin URI: https://github.com/squarecandy/cleanup-wordpress-nags
+GitHub Plugin URI: https://github.com/squarecandy/cleanup-wordpress-nags
+Description: WordPress Plugin to cleanup annoying nag or marketing messages from various plugins we use.
+Author: Square Candy Design
+Author URI: https://squarecandydesign.com/
+Version: 1.2.5-dev.0
+*/
 
 
 //////////
